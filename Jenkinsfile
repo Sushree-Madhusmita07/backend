@@ -1,3 +1,4 @@
+Your pipeline becomes
 pipeline {
     agent any
 
@@ -38,6 +39,16 @@ pipeline {
                 --username AWS \
                 --password-stdin \
                 ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+                '''
+            }
+        }
+
+        stage('Tag Docker Image') {
+            steps {
+                sh '''
+                docker tag \
+                ${IMAGE_NAME}:${IMAGE_TAG} \
+                ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${IMAGE_TAG}
                 '''
             }
         }

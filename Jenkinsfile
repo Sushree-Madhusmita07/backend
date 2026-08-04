@@ -60,6 +60,19 @@ pipeline {
                 ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${IMAGE_TAG}
                 '''
             }
+     
         }
+
+        stage('Download Task Definition') {
+    steps {
+        sh '''
+        aws ecs describe-task-definition \
+        --task-definition stockpilot-dev-task \
+        --query taskDefinition \
+        > task-definition.json
+        '''
+    }
+        }
+        
     }
 }

@@ -1,4 +1,4 @@
-Your pipeline becomes
+
 pipeline {
     agent any
 

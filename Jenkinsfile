@@ -103,7 +103,7 @@ stage('Register Task Definition') {
 }
 
 stage('Update ECS Service') {
-    steps {
+    steps { 
         sh '''
         aws ecs update-service \
         --cluster stockpilot-dev-ecs-cluster \
